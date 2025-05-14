@@ -361,20 +361,17 @@ health_pie = px.pie(
 
 # ------------------------ Stress Level ---------------------------- #
 
-# Clean and prepare Stress column
-df['Stress'] = (
-    df['Stress']
-    .astype(str)
-    .str.strip()
-)
+# df['Stress'] = (
+#     df['Stress']
+#     .astype(str)
+#     .str.strip()
+#     .replace({
+#         "" : "",
+#     })
+# )
 
 # Count values
 df_stress_counts = df['Stress'].value_counts().reset_index(name='Count')
-df_stress_counts.rename(columns={'index': 'Stress'}, inplace=True)
-
-# Optional: enforce rating order
-df_stress_counts['Stress'] = pd.Categorical(df_stress_counts['Stress'], categories=rating_order, ordered=True)
-df_stress_counts = df_stress_counts.sort_values('Stress')
 
 # Bar chart
 stress_fig = px.bar(
